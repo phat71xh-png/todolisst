@@ -1,0 +1,287 @@
+:root {
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  color: #1f2937;
+  background: #f2f5f3;
+  font-synthesis: none;
+  font-size: 18px;
+  text-rendering: optimizeLegibility;
+}
+
+* { box-sizing: border-box; }
+body { margin: 0; min-width: 320px; min-height: 100vh; }
+button, input { font: inherit; }
+button { cursor: pointer; }
+
+.celebration {
+  position: fixed;
+  top: 24px;
+  left: 50%;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  width: min(430px, calc(100% - 32px));
+  padding: 16px 20px;
+  overflow: hidden;
+  border: 1px solid #a7dcc2;
+  border-radius: 16px;
+  color: #174a33;
+  background: rgba(239, 253, 245, 0.97);
+  box-shadow: 0 18px 45px rgba(23, 74, 51, 0.2);
+  animation: celebration-in 400ms ease-out both, celebration-out 350ms ease-in 2.65s both;
+}
+
+.celebration-icon {
+  position: relative;
+  z-index: 1;
+  font-size: 2rem;
+  animation: celebration-bounce 650ms ease-out;
+}
+
+.celebration-content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.celebration-content strong { font-size: 1.05rem; }
+.celebration-content span { color: #47705c; font-size: 0.9rem; }
+
+.celebration-all {
+  border-color: #f4c75a;
+  color: #704b0b;
+  background: rgba(255, 249, 224, 0.98);
+  box-shadow: 0 18px 45px rgba(142, 94, 16, 0.22);
+}
+
+.celebration-all .celebration-content span { color: #87651e; }
+
+.confetti {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.confetti span {
+  position: absolute;
+  top: -12px;
+  width: 8px;
+  height: 14px;
+  border-radius: 2px;
+  background: var(--confetti-color);
+  opacity: 0;
+  transform: rotate(20deg);
+  animation: confetti-fall 1.4s ease-out calc(var(--confetti-index) * 55ms) forwards;
+}
+
+@keyframes celebration-in {
+  from { opacity: 0; transform: translate(-50%, -20px) scale(0.94); }
+  to { opacity: 1; transform: translate(-50%, 0) scale(1); }
+}
+
+@keyframes celebration-out {
+  from { opacity: 1; transform: translate(-50%, 0) scale(1); }
+  to { opacity: 0; transform: translate(-50%, -12px) scale(0.97); }
+}
+
+@keyframes celebration-bounce {
+  0% { transform: scale(0.5) rotate(-18deg); }
+  55% { transform: scale(1.2) rotate(10deg); }
+  100% { transform: scale(1) rotate(0); }
+}
+
+@keyframes confetti-fall {
+  0% { opacity: 1; transform: translateY(-5px) rotate(0); }
+  100% { opacity: 0; transform: translateY(85px) rotate(280deg); }
+}
+
+.page-shell {
+  min-height: 100vh;
+  display: grid;
+  place-items: start center;
+  padding: 64px 20px;
+  background: radial-gradient(circle at top left, rgba(31, 120, 82, 0.13), transparent 32%), #f2f5f3;
+}
+
+.todo-card {
+  width: min(1000px, 100%);
+  overflow: hidden;
+  background: #fff;
+  border: 1px solid #dfe7e2;
+  border-radius: 24px;
+  box-shadow: 0 22px 60px rgba(29, 61, 46, 0.12);
+}
+
+.hero { padding: 34px 38px 24px; }
+.eyebrow { margin: 0 0 8px; color: #237a57; font-size: 0.78rem; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; }
+h1 { margin: 0; color: #173b2b; font-size: clamp(2rem, 6vw, 3.15rem); line-height: 1.05; }
+.subtitle { margin: 12px 0 0; color: #66736c; }
+
+.add-form { display: flex; gap: 10px; padding: 0 38px 26px; }
+.add-form input, .search, .sort-select, .edit-form input { min-width: 0; border: 1px solid #ced9d2; border-radius: 12px; outline: none; transition: border-color 160ms, box-shadow 160ms; }
+.add-form input { flex: 1; padding: 14px 16px; }
+input:focus { border-color: #27835d; box-shadow: 0 0 0 3px rgba(39, 131, 93, 0.13); }
+.sort-select:focus { border-color: #27835d; box-shadow: 0 0 0 3px rgba(39, 131, 93, 0.13); }
+.add-form button { border: 0; border-radius: 12px; padding: 0 20px; color: white; background: #237a57; font-weight: 700; }
+.add-form button:hover { background: #196743; }
+.add-form button:disabled { cursor: not-allowed; opacity: 0.55; }
+
+.toolbar { display: flex; gap: 14px; justify-content: space-between; padding: 18px 38px; background: #f8faf9; border-block: 1px solid #e7ece9; }
+.filters { display: flex; gap: 6px; }
+.filters button, .actions button, .edit-form button { border: 0; border-radius: 9px; padding: 8px 11px; color: #536058; background: transparent; }
+.filters button:hover, .filters button.active { color: #176841; background: #e4f2ea; }
+.toolbar-controls { display: flex; gap: 10px; }
+.search { width: 190px; padding: 9px 12px; background: #fff; }
+.sort-select { width: 170px; padding: 9px 12px; color: #536058; background: #fff; }
+
+.error { display: flex; justify-content: space-between; gap: 16px; margin: 20px 38px 0; padding: 12px 14px; border-radius: 10px; color: #8b2f2f; background: #fff0f0; }
+.error button { border: 0; color: inherit; background: transparent; font-weight: 700; }
+.empty-state { margin: 0; padding: 52px 38px; color: #7a857f; text-align: center; }
+
+.todo-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin: 0;
+  padding: 24px 38px;
+  background: #f5f8f6;
+  list-style: none;
+}
+
+.todo-list li {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  min-height: 82px;
+  padding: 16px 18px;
+  border: 1px solid #dfe7e2;
+  border-radius: 14px;
+  background: #ffffff;
+  box-shadow: 0 5px 16px rgba(29, 61, 46, 0.06);
+  transition: transform 160ms ease, box-shadow 160ms ease;
+}
+
+.todo-list li:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 9px 22px rgba(29, 61, 46, 0.1);
+}
+.todo-list input[type="checkbox"] { width: 20px; height: 20px; accent-color: #237a57; }
+.todo-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.todo-title {
+  overflow-wrap: anywhere;
+}
+
+.todo-date {
+  color: #89938d;
+  font-size: 0.8rem;
+}
+.todo-deadline {
+  color: #a16207;
+  font-size: 0.8rem;
+}
+
+.overdue .todo-deadline {
+  color: #dc2626;
+  font-weight: 700;
+}
+
+.overdue-message {
+  width: fit-content;
+  padding: 4px 9px;
+  border-radius: 999px;
+  color: #b91c1c;
+  background: #fee2e2;
+  font-size: 0.75rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.todo-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+.overdue {
+  background: #fff7f7;
+  border-color: #fecaca !important;
+}
+.completed {
+  background: #f8faf9;
+}
+.completed .todo-title { color: #909992; text-decoration: line-through; }
+.actions { display: flex; opacity: 0; transition: opacity 160ms; }
+.todo-list li:hover .actions, .actions:focus-within { opacity: 1; }
+.actions button:hover { background: #eef3f0; }
+.actions .danger { color: #b04444; }
+.actions .danger:hover { background: #fff0f0; }
+.edit-form { flex: 1; display: flex; gap: 6px; }
+.edit-form input { flex: 1; padding: 9px 10px; }
+.edit-form button { background: #edf4f0; }
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 7px;
+  padding: 0 38px 24px;
+  background: #f5f8f6;
+}
+
+.pagination button {
+  min-width: 38px;
+  height: 38px;
+  padding: 0 11px;
+  border: 1px solid #d5e0da;
+  border-radius: 10px;
+  color: #536058;
+  background: #ffffff;
+  font-weight: 700;
+}
+
+.pagination button:hover:not(:disabled),
+.pagination button.active {
+  color: #ffffff;
+  border-color: #237a57;
+  background: #237a57;
+}
+
+.pagination button:disabled {
+  cursor: not-allowed;
+  opacity: 0.45;
+}
+
+footer { display: flex; justify-content: space-between; padding: 20px 38px; color: #718078; background: #f8faf9; border-top: 1px solid #e7ece9; font-size: 0.9rem; }
+
+@media (max-width: 620px) {
+  .page-shell { padding: 18px 12px; }
+  .todo-card { border-radius: 18px; }
+  .hero, .add-form, .todo-list { padding-inline: 20px; }
+  .todo-list { gap: 10px; padding-block: 18px; }
+  .todo-list li { align-items: flex-start; padding: 14px; }
+  .toolbar { align-items: stretch; flex-direction: column; padding-inline: 20px; }
+  .toolbar-controls { width: 100%; }
+  .search, .sort-select { width: 50%; }
+  .actions { opacity: 1; }
+  .pagination { padding-inline: 20px; }
+  footer { padding-inline: 20px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .celebration,
+  .celebration-icon,
+  .confetti span {
+    animation: none;
+  }
+}
