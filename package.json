@@ -7,7 +7,7 @@
     "dev": "concurrently -n CLIENT,SERVER -c cyan,green \"npm run dev --workspace client\" \"npm run dev --workspace server\"",
     "dev:client": "npm run dev --workspace client",
     "dev:server": "npm run dev --workspace server",
-    "check": "node --check server/src/app.js && node --check server/src/db.js && node --check server/src/index.js && node --check server/src/todoRoutes.js && node --check api/index.js",
+    "check": "node --check server/src/app.js && node --check server/src/db.js && node --check server/src/index.js && node --check server/src/todoRoutes.js",
     "build": "npm run build --workspace client",
     "start": "npm run start --workspace server"
   },
